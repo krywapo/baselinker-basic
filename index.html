@@ -1,0 +1,259 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Baselinker - zadanie</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+        }
+        *, ::after, ::before {
+            box-sizing: border-box;
+        }
+        .main-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: 10vh;
+        }
+        #show-popup {
+            text-transform: uppercase;
+            margin: 20px 0;
+            padding: 10px 50px;
+            cursor: pointer;
+            background: #2c3c6f;
+            color: white;
+            transition: 0.2s;
+            border: 2px solid #2c3c6f;
+        }
+        #show-popup:hover {
+            background: white;
+            color: #2c3c6f;
+        }
+        .popup-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            width: 640px;
+            height: 420px;
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 9px 9px 20px #484848;
+            display: none;
+        }
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgb(0 0 0 / 60%);
+            z-index: 1;
+            display: none;
+        }
+        .popup-container h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 40px;
+        }
+        .popup-container input[type="text"], .popup-container input[type="email"] {
+            border: none;
+            border-bottom: 1px solid;
+            padding: 10px;
+            font-size: 16px;
+            color: black;
+            width: 100%;
+        }
+        .popup-container input[type="text"]:focus {
+            border-width: 2px;
+            box-shadow: none;
+            outline: none;
+        }
+        .popup-container input[type="submit"] {
+            text-transform: uppercase;
+            padding: 10px 50px;
+            cursor: pointer;
+            background: #2c3c6f;
+            color: white;
+            transition: 0.2s;
+            border: none;
+            margin: auto;
+            display: inherit;
+            transition: 0.2s;
+            border: 2px solid #2c3c6f;
+        }
+        .popup-container input[type="submit"]:hover {
+            background: white;
+            color: #2c3c6f;
+        }
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: row;
+            margin-left: -15px;
+            margin-right: -15px;
+        }
+        .row .col {
+            flex: 0 0 50%;
+            max-width: 50%;
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+        .term1 {
+            margin-top: 30px;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: flex-start;
+        }
+        .term1 label {
+            padding-left: 5px;
+            font-size: 13px;
+        }
+        #close {
+            height: 25px;
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            cursor: pointer;
+        }
+        #close span {
+            display: block;
+            width: 35px;
+            height: 4px;
+            border-radius: 15px;
+            background-color: #000;
+            margin-bottom: 6px;
+        }
+        #close span:first-child {
+            -webkit-transform: rotate(45deg);
+            transform: rotate(45deg);
+            top: 11px;
+            position: relative;
+        }
+        #close span:last-child {
+            -webkit-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+            top: 1px;
+            position: relative;
+        }
+        .error {
+            color: red;
+            margin-top: 5px;
+            display: block;
+            font-size: 13px;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-wrapper">
+
+        <h1>Witaj, kliknij przycisk poniżej:</h1>
+
+        <div id="show-popup">
+            Start
+        </div>
+
+        <div id="popup" class="popup-container">
+            <div id="close">
+                <span></span>
+                <span></span>
+            </div>
+
+            <h2>Formularz</h2>
+
+            <form id="main-form" method="post" action="post.php">
+
+                <div class="row">
+                    <div class="col">
+                        <input type="text" required id="st_name" name="st_name" placeholder="Imię" minlength="3" maxlength="20">
+                    </div>
+    
+                    <div class="col">
+                        <input type="email" required id="email-address" name="email_address" placeholder="Adres email">
+                    </div>
+                </div> 
+
+                <div class="term1">
+                    <input type="checkbox" id="term" name="term_name" value="tak">
+                    <label for="term">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque nec iaculis nulla, non interdum lorem. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Suspendisse rhoncus eu diam sodales consequat. Praesent mi lorem, pharetra at dictum in, gravida vitae quam. Nulla consequat, magna ac cursus laoreet, mi metus mollis nibh, eget tristique arcu ante in mauris. Proin aliquet turpis ut lectus tempus, ac accumsan tortor blandit.e</label>
+                </div>
+
+                <input type="submit" value="Wyślij">
+              </form>
+        </div>
+
+        <div class="overlay"></div>
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <script>
+        $( document ).ready(function() {
+
+            $( "#show-popup" ).on( "click", function() {
+                $('#popup, .overlay').fadeIn();
+            } );
+
+            $( "#close, .overlay" ).on( "click", function() {
+                $('#popup, .overlay').fadeOut();
+            } );
+
+                $('#main-form').submit(function(e) {
+        
+                    var name = $('#st_name').val();
+                    var email = $('#email-address').val();
+                    var error = 0;
+
+                    $(".error").remove();
+
+                    if (name.length < 1) {
+                        error = 1;
+                        $('#st_name').after('<span class="error">To pole jest wymagane</span>');
+                    
+                    } else if (name.length < 3) {
+                        error = 1;
+                        $('#st_name').after('<span class="error">To pole musi posiadać min. 3 znaki</span>');
+                    
+                    } else if (name.length > 70) {
+                        error = 1;
+                        $('#st_name').after('<span class="error">To pole może posiadać max. 10 znaków</span>');
+                    }
+
+                    if (email.length < 1) {
+                        error = 1;
+                        $('#email-address').after('<span class="error">To pole jest wymagane</span>');
+                    
+                    } else {
+
+                        var regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+                        var valid = regex.test(email);
+                    
+                        if (!valid) {
+                            error = 1;
+                            $('#email-address').after('<span class="error">Wpisz poprawny adres email</span>');
+                        }
+                    }
+
+                    if(error == 1) {
+                        e.preventDefault();
+                    }
+                })
+
+        });
+    </script>
+</body>
+</html>
